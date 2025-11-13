@@ -1,0 +1,341 @@
+     МІНІСТЕРСТВО ОСВІТИ І НАУКИ УКРАЇНИ
+     ХАРКІВСЬКИЙ НАЦІОНАЛЬНИЙ
+     УНІВЕРСИТЕТ РАДІОЕЛЕКТРОНІКИ
+     Кафедра «Програмна інженерія»
+     
+     
+     
+     
+     
+     ЗВІТ
+     з практичної роботи
+     з дисципліни «Аналіз та рефакторінг коду»
+     на тему «Основи створення підтримуваного та стандартизованого коду в Visual Basic: застосування правил форматування, іменування та аналізу».
+     
+     
+     
+     Виконав:
+     ст. гр. ПЗПІ-23-10
+     Долгополов Я. С.
+     
+     
+     
+     Перевірив:
+     старший викл. Кафедри ПІ
+     Сокорчук І.П.
+     
+     
+     
+     Харків 2025
+     1 ЗАФІКСОВАНІ ЗМІНИ
+     
+     №
+     Дата
+     Версія звіту
+     Опис змін та виправлень
+     1
+     12.11.2025
+     0.1
+     Підготовка титульної сторінки та формулювання мети роботи
+     2
+     12.11.2025
+     0.2
+     Дослідження джерел для програмування на Visual Basic, створення додатку з використаними матеріалами, розробка прикладів коду
+     3
+     12.11.2025
+     0.3
+     Опис виконаних етапів роботи, формулювання висновків за результатами, оформлення додатків
+     
+     2 ЗАВДАННЯ
+     
+     Мета роботи – дослідити, проаналізувати та систематизувати ключові рекомендації й найкращі практики написання коду мовою програмування Visual Basic. Робота фокусується на визначенні важливості стандартизації стилю кодування для покращення читабельності, підтримуваності та командної роботи. Вона охоплює аналіз структури проєктів Visual Studio, принципи поділу коду на модулі та класи, а також офіційні конвенції форматування та іменування Microsoft. Окрему увагу приділено дослідженню ідіоматичних підходів VB до обробки помилок через Try-Catch, а також ефективних практик коментування й документування коду. Мета також полягає в оцінці ролі інструментів Visual Studio у підтримці високої якості коду та демонстрації на практичних прикладах різниці між ідіоматичним і неідіоматичним кодом.
+     
+     3 ОПИС ВИКОНАНОЇ РОБОТИ
+     
+     Хід Роботи
+     
+     1. Структура коду
+     У Visual Basic організація проєкту здійснюється через Visual Studio Solution. Кожен проєкт містить чітку структуру файлів: Solution Explorer відображає ієрархію проєкту з розділенням на References, My Project, та файли коду (Див. додаток В.1). Код організується у модулі (.vb файли), де кожен файл може містити один або кілька класів. Простору імен (Namespaces) використовуються для логічного групування пов'язаних класів. Важливою особливістю є розділення коду на регіони (#Region/#End Region) для покращення читабельності великих файлів.
+     
+     2. Форматування коду
+     Форматування в Visual Basic регулюється налаштуваннями Visual Studio та рекомендаціями Microsoft. Стандарт передбачає використання відступів у 4 пробіли, вирівнювання коду за рівнем вкладеності (Див. додаток В.2). Ключові слова (If, For, Function) пишуться з великої літери, тоді як імена змінних - у CamelCase. Visual Studio має вбудований інструмент автоматичного форматування коду (Ctrl+K, Ctrl+D), який дотримується встановлених правил. Довжина рядка рекомендується не більше 80-120 символів для зручного перегляду.
+     
+     3. Іменування
+     Конвенції іменування в Visual Basic чітко визначені Microsoft. Змінні та параметри методів використовують CamelCase (наприклад, userCount, customerName). Класи, методи, властивості та простори імен використовують PascalCase (наприклад, CustomerRepository, CalculateTotal). Константи пишуться у верхньому регістрі через підкреслення (MAX_USERS, DEFAULT_TIMEOUT). Уникання "магічних чисел" є обов'язковою практикою - замість числових літералів слід використовувати константи (Див. додаток В.3).
+     
+     4. Коментарі
+     У Visual Basic використовуються одинарні лапки (') для коментарів. Коментарі мають пояснювати "чому", а не "що" робить код (Див. додаток В.4). Для тимчасового відключення коду використовується конструкція #If False ... #End If. Рекомендується використовувати коментарі для пояснення складної бізнес-логіки, алгоритмів та обґрунтування рішень. Слід уникати коментарів, які очевидні з коду.
+     
+     5. Документування коду
+     Visual Basic не підтримує вбудоване XML-документування на відміну від C#. Як альтернативу можна використовувати звичайні коментарі з чіткою структурою, що імітують XML-документування. Розробники часто використовують коментарі у стилі JavaDoc вручну, або зовнішні інструменти документації для генерації документації з коду.
+     
+     6. Конвенції стилю кодування для Visual Basic
+     Специфічні конвенції VB включають використання Option Explicit On та Option Strict On для більш строгої типізації (Див. додаток В.6). Ключовою ідіомою є правильна обробка помилок через Try-Catch-Finally замість старомодного On Error Goto. Рекомендується використовувати Using для автоматичного звільнення ресурсів. Для роботи з колекціями краще використовувати Generic колекції (List(Of T)) замість ArrayList.
+     
+     7. Кодування на основі тестування (TDD)
+     Visual Basic має потужну підтримку тестування через MSTest, NUnit або xUnit (Див. додаток В.7). Тестові проєкти створюються окремо від основного коду. Unit-тести розміщуються у тестових класах з атрибутом <TestClass>. Кожен тестовий метод позначається <TestMethod>. Арранжування тестів слідує патерну AAA (Arrange-Act-Assert). Mock-об'єкти використовуються для ізоляції тестованого коду.
+     
+     8. Інструменти та автоматизація для підтримки якості коду
+     Visual Studio надає потужні інструменти для аналізу коду (Див. додаток В.8). Code Analysis (FxCop) виконує статичний аналіз для виявлення потенційних проблем. Code Metrics розраховує метрики складності коду. Рефакторинг (Ctrl+R, Ctrl+R) дозволяє безпечно змінювати структуру коду. Extensions like SonarLint інтегрують додаткові перевірки якості.
+     
+     9. Загальні приклади оформлення коду та їх аналіз
+     Аналіз прикладів демонструє різницю між ідіоматичним та неідіоматичним кодом на VB (Див. додаток В.9). "Поганий" код часто містить старомодні конструкції (On Error, GoTo), неявне оголошення змінних, та відсутність обробки винятків. "Хороший" код використовує сучасні підходи (Try-Catch, Using), строгу типізацію, та чіткі імена змінних.
+     
+     4 ВИСНОВКИ
+     
+     У ході виконання даної роботи було проаналізовано та систематизовано ключові рекомендації щодо написання коду мовою програмування Visual Basic. Дослідження показало, що незважаючи на вік мови, сучасні практики розробки на VB дотримуються тих же принципів, що й інші мови .NET платформи.
+     
+     Було встановлено, що організація проєкту через Visual Studio Solution забезпечує стандартизовану структуру, що полегшує командної роботи. Використання просторів імен та регіонів дозволяє ефективно організувати великі кодові бази. Чіткі конвенції іменування (PascalCase для типів, CamelCase для змінних) роблять код зрозумілим та передбачуваним.
+     
+     Головний висновок полягає в тому, що сучасний Visual Basic код повинен уникати застарілих конструкцій на кшталт On Error Goto на користь сучасних механізмів обробки винятків Try-Catch-Finally. Використання Option Strict On та Option Explicit On є обов'язковим для запобігання типових помилок. Система XML-документування забезпечує високий рівень документування коду.
+     
+     Крім того, робота підкреслила важливість інтегрованих інструментів Visual Studio. Code Analysis, метрики коду та засоби рефакторингу є незамінними помічниками у підтримці високої якості коду. Таким чином, дотримання проаналізованих правил та активне використання інструментів Visual Studio є ключем до створення надійних та підтримуваних додатків на Visual Basic.
+     
+     5 ВИКОРИСТАНІ ДЖЕРЕЛА
+     
+     1. "Visual Basic Coding Conventions". URL: https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/program-structure/coding-conventions (Дата звернення 12.11.2025)
+     2. "Visual Basic Language Specification". URL: https://docs.microsoft.com/en-us/dotnet/visual-basic/language-reference (Дата звернення 12.11.2025)
+     3. "Framework Design Guidelines". URL: https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines (Дата звернення 12.11.2025)
+     4. "Best Practices for Visual Basic .NET". URL: https://learn.microsoft.com/en-us/shows/visual-basic-fundamentals-for-absolute-beginners (Дата звернення 12.11.2025)
+     5. "Visual Basic (programming language)". URL: https://uk.wikipedia.org/wiki/Visual_Basic_.NET (Дата звернення 12.11.2025)
+     
+     Додаток А
+     Відеозапис
+     
+     Відеозапис доповіді: https://www.youtube.com/watch?v=nNHeAZRALRM 
+     
+     Хронологічний опис відеозапису:
+     00:00 – Вступ
+     00:33 – Структура коду
+     01:33 – Форматування коду
+     02:11 – Іменування
+     02:52 – Коментарі
+     03:30 – Документування коду
+     04:08 – Конвенції стилю кодування для Visual Basic
+     04:47 – Кодування на основі тестування
+     05:24 – Інструменти та автоматизація
+     06:03 – Приклади оформлення коду
+     06:47 – Висновки
+     07:32 – Використані джерела
+     
+     ДОДАТОК Б
+     Слайди презентації:
+     Рисунок Б.1 – Титульний слайд.
+     Рисунок Б.2 – Організація проєкту та файлів.
+     Рисунок Б.3 – Відступи, вирівнювання та довжина рядків.
+     Рисунок Б.4 – Іменування змінних, функцій, класів.
+     Рисунок Б.5 – Коли та де використовувати коментарі.
+     Рисунок Б.6 – Спеціалізовані коментарі для документації.
+     Рисунок Б.7 – Конвенції стилю для Visual Basic.
+     Рисунок Б.8 – Основи Test-Driven Development (TDD) та організація коду.
+     Рисунок Б.9 – Статичний аналіз та автоматичні перевірки.
+     Рисунок Б.10 – Приклади оформлення коду: аналіз.
+     Рисунок Б.11 – Висновки.
+     Рисунок Б.12 – Використані джерела.
+     
+     ДОДАТОК В
+     Програмний код:
+     В.1 Приклад структури проєкту Visual Basic:
+       ```vb
+       ' Solution: MyApplication.sln
+       ' Project: MyApplication.vbproj
+       
+       ' My Project/Application.Designer.vb
+       ' My Project/Resources.resx
+       ' My Project/Settings.settings
+       
+       ' Forms/LoginForm.vb
+       ' Forms/MainForm.vb
+       
+       ' Classes/Customer.vb
+       ' Classes/Order.vb
+       
+       ' Modules/Helpers.vb
+       ' Modules/Constants.vb
+     
+     В. 2 Приклад правильного форматування коду:
+       ' Погано: без відступів, нечитабельно
+       Public Function CalculateTotal(price As Decimal, quantity As Integer) As Decimal
+       Return price * quantity
+       End Function
+       
+       ' Добре: правильні відступи, читабельно
+       Public Function CalculateTotal(
+           price As Decimal, 
+           quantity As Integer) As Decimal
+           
+           Return price * quantity
+       End Function
+     
+В.3 Приклад конвенцій іменування та констант:
+       ' Добре: відповідно до конвенцій
+       Public Class CustomerService
+           Private Const MAX_ORDER_COUNT As Integer = 100
+           
+           Public Function GetCustomerById(customerId As Integer) As Customer
+               ' ...
+           End Function
+       End Class
+       
+       ' Погано: невідповідність конвенціям
+       Public Class customer_service
+           Private Const max_order_count As Integer = 100
+           
+           Public Function get_customer_by_id(customer_id As Integer) As customer
+               ' ...
+           End Function
+       End Class
+     
+     В.4 Приклад правильного коментування:
+       ' Погано: коментар пояснює "що"
+       ' Додаємо 10 до ціни
+       price += 10
+       
+       ' Добре: коментар пояснює "чому"
+       ' Збільшуємо ціну на фіксовану надбавку згідно з політикою компанії
+       price += 10
+       
+       ' TODO: Реалізувати перевірку кредитного рейтингу
+       ' FIXME: Виправти обробку нульових значень
+     
+     В.5 Приклад XML-документування:
+       ''' <summary>
+       ''' Обчислює загальну вартість замовлення
+       ''' </summary>
+       ''' <param name="price">Ціна за одиницю товару</param>
+       ''' <param name="quantity">Кількість одиниць</param>
+       ''' <returns>Загальна вартість замовлення</returns>
+       ''' <exception cref="ArgumentOutOfRangeException">
+       ''' Викидається, коли quantity менше 0
+       ''' </exception>
+       Public Function CalculateTotal(price As Decimal, quantity As Integer) As Decimal
+           If quantity < 0 Then
+               Throw New ArgumentOutOfRangeException("quantity")
+           End If
+           
+           Return price * quantity
+       End Function
+     
+     В.6 Приклад сучасних підходів VB:
+       ' Добре: сучасний підхід
+       Option Strict On
+       Option Explicit On
+       
+       Public Class DataProcessor
+           Public Sub ProcessData()
+               Try
+                   Using connection As New SqlConnection(connectionString)
+                       connection.Open()
+                       ' Обробка даних
+                   End Using
+               Catch ex As SqlException
+                   ' Обробка помилок БД
+               Catch ex As Exception
+                   ' Загальна обробка помилок
+               End Try
+           End Sub
+       End Class
+       
+       ' Погано: застарілий підхід
+       Option Strict Off
+       Option Explicit Off
+       
+       Public Class DataProcessor
+           Public Sub ProcessData()
+               On Error GoTo ErrorHandler
+               ' Код без належної обробки помилок
+               Exit Sub
+       ErrorHandler:
+               ' Примітивна обробка помилок
+           End Sub
+       End Class
+     
+     В.7 Приклад unit-тестів:
+       <TestClass>
+       Public Class CalculatorTests
+           <TestMethod>
+           Public Sub Add_TwoNumbers_ReturnsSum()
+               ' Arrange
+               Dim calculator As New Calculator()
+               Dim expected As Integer = 5
+               
+               ' Act
+               Dim actual As Integer = calculator.Add(2, 3)
+               
+               ' Assert
+               Assert.AreEqual(expected, actual)
+           End Sub
+           
+           <TestMethod>
+           <ExpectedException(GetType(ArgumentOutOfRangeException))>
+           Public Sub Divide_DivideByZero_ThrowsException()
+               ' Arrange
+               Dim calculator As New Calculator()
+               
+               ' Act
+               calculator.Divide(10, 0)
+           End Sub
+       End Class
+     
+     В.8 Приклад використання інструментів аналізу:
+       ' Code Analysis попереджає про потенційні проблеми
+       
+       ' CA1822: Mark members as static
+       Public Function GetApplicationName() As String
+           Return "MyApp"
+       End Function
+       
+       ' CA2202: Do not dispose objects multiple times  
+       Public Sub ProcessFile()
+           Using stream As New FileStream("file.txt", FileMode.Open)
+               ' Код, який може призвести до повторного звільнення
+           End Using
+       End Sub
+     
+     В.9 Приклад неідіоматичного ("поганого") коду:
+     ' ПОГАНО: застарілі практики
+       Public Class bad_example
+           Public sub process_data()
+               On Error Resume Next
+               dim x = 10
+               dim y = "20"
+               dim z = x + y ' Неявне перетворення типів
+           End sub
+       End Class
+     
+     В.10 Приклад ідіоматичного ("доброго") коду:
+     ' ДОБРЕ: сучасні практики
+       Option Strict On
+       Option Explicit On
+       
+       Public Class CustomerProcessor
+           Private ReadOnly _customerRepository As ICustomerRepository
+           
+           Public Sub New(customerRepository As ICustomerRepository)
+               _customerRepository = customerRepository
+           End Sub
+           
+           Public Function GetActiveCustomers() As List(Of Customer)
+               Try
+                   Return _customerRepository.GetCustomers()
+                       .Where(Function(c) c.IsActive)
+                       .ToList()
+               Catch ex As Exception
+                   Logger.LogError(ex, "Помилка при отриманні активних клієнтів")
+                   Throw
+               End Try
+           End Function
+       End Class
+
+
+2
+
+
+
+
+
+
+
+
+
+
